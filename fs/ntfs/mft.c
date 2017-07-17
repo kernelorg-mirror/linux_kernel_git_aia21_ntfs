@@ -1,7 +1,7 @@
 /**
  * mft.c - NTFS kernel mft record operations. Part of the Linux-NTFS project.
  *
- * Copyright (c) 2001-2012 Anton Altaparmakov and Tuxera Inc.
+ * Copyright (c) 2001-2017 Anton Altaparmakov and Tuxera Inc.
  * Copyright (c) 2002 Richard Russon
  *
  * This program/include file is free software; you can redistribute it and/or
@@ -2110,7 +2110,7 @@ static int ntfs_mft_record_format(const ntfs_volume *vol, const s64 mft_no)
 	i_size = i_size_read(mft_vi);
 	end_index = i_size >> PAGE_SHIFT;
 	if (unlikely(index >= end_index)) {
-		if (unlikely(index > end_index || ofs + vol->mft_record_size >=
+		if (unlikely(index > end_index || ofs + vol->mft_record_size >
 				(i_size & ~PAGE_MASK))) {
 			ntfs_error(vol->sb, "Tried to format non-existing mft "
 					"record 0x%llx.", (long long)mft_no);
